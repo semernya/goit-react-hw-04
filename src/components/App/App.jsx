@@ -56,11 +56,11 @@ export default function App() {
       {error && <ErrorMessage />}
 
       {images.length > 0 && <ImageGallery items={images} />}
-      
+
       <DotLoader loading={loading} color="#01786F" size={50} />
 
       {images.length > 0 && !loading && (<LoadMoreBtn onClick={handleLoadMore} />)}
-
+      <LoadMoreBtn onClick={handleLoadMore} />
     </div>
   )
 }
