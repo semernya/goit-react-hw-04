@@ -1,8 +1,17 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'https://api.unsplash.com/'
+axios.defaults.baseURL = 'https://api.unsplash.com'
+const KEY = 'CfGc7-GnkOpXzLpUnpAM6SpJGPgI7KIxPlz_TqYPzwM'
 
-const hetchImages = async () => {
-    const response = await axios.get('/search/photos/query=cats');
-    return response.data.hits;
+export const fetchImages = async (searchQuery, currPage) => {
+    const response = await axios.get('/search/photos', {
+        params: {
+            client_id: KEY,
+            query: searchQuery,
+            page: currPage,
+            per_page: 12,
+        }
+    });
+    console.log(response.data.results);
+    return response.data.results;
 };
