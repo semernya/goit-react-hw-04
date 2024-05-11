@@ -19,6 +19,7 @@ export default function App() {
   const handleSearch = async (newQuery) => {
     setQuery(newQuery);
     setPage(1);
+    setImages([]);
   }
 
   const handleLoadMore = () => {
@@ -52,13 +53,13 @@ export default function App() {
     <div>
       <SearchBar onInput={handleSearch} />
 
-      <DotLoader loading={loading} color="#01786F" size={50} />
-
       {error && <ErrorMessage />}
 
       {images.length > 0 && <ImageGallery items={images} />}
+      
+      <DotLoader loading={loading} color="#01786F" size={50} />
 
-      {images.length > 0 && <LoadMoreBtn onClick={handleLoadMore} />}
+      {images.length > 0 && !loading && (<LoadMoreBtn onClick={handleLoadMore} />)}
 
     </div>
   )

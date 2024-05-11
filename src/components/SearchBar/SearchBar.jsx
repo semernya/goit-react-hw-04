@@ -7,6 +7,7 @@ export default function SearchBar({ onInput }) {
 
     const handleSubmit = (values, actions) => {
         onInput(values.query);
+        console.log(values.query);
         actions.resetForm();
     }
 
@@ -18,6 +19,7 @@ export default function SearchBar({ onInput }) {
                         autoFocus
                         placeholder="Search images and photos" />
                     <button type="submit" onClick={notify}>Search</button>
+
                 </Form>
             </Formik>
         </header>
