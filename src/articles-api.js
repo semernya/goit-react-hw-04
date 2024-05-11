@@ -9,9 +9,8 @@ export const fetchImages = async (searchQuery, currPage) => {
             client_id: KEY,
             query: searchQuery,
             page: currPage,
-            per_page: 12,
+            per_page: 6,
         }
     });
-    console.log(response.data.results);
     return response.data.results;
 };
