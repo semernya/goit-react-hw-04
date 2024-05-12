@@ -9,7 +9,7 @@ export const fetchImages = async (searchQuery, currPage) => {
             client_id: KEY,
             query: searchQuery,
             page: currPage,
-            per_page: 6,
+            per_page: 12,
         }
     });
     return response.data.results;

@@ -6,6 +6,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import DotLoader from "react-spinners/DotLoader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../ImageModal/ImageModal";
 
 
 export default function App() {
@@ -16,6 +17,11 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
 
+  const [modal, setModal] = useState(false);
+  const [imageURL, setImageURL] = useState('');
+  const [userName, setUserName] = useState(null);
+  const [likes, setLikes] = useState(null);
+
   const handleSearch = async (newQuery) => {
     setQuery(newQuery);
     setPage(1);
@@ -24,6 +30,18 @@ export default function App() {
 
   const handleLoadMore = () => {
     setPage(page + 1);
+  }
+
+  const openModal = (url, likes, username) => {
+    setModal(true);
+    setImageURL(url);
+    setUserName(username);
+    setLikes(likes);
+    closeModal();
+  }
+
+  const closeModal = () => {
+    setModal(false);
   }
 
   useEffect(() => {
@@ -55,12 +73,14 @@ export default function App() {
 
       {error && <ErrorMessage />}
 
-      {images.length > 0 && <ImageGallery items={images} />}
+      {images.length > 0 && <ImageGallery items={images} onClick={openModal} />}
 
       <DotLoader loading={loading} color="#01786F" size={50} />
 
       {images.length > 0 && !loading && (<LoadMoreBtn onClick={handleLoadMore} />)}
-      <LoadMoreBtn onClick={handleLoadMore} />
+
+      (modal && <ImageModal img={imageURL} likes={likes} user={userName} modalState={modal} onClose={closeModal} />)
+
     </div>
   )
 }
