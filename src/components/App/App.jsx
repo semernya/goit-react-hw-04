@@ -16,6 +16,8 @@ export default function App() {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
+  const [toast, setToast] = useState(false);
+
 
   const [modal, setModal] = useState(false);
   const [imageURL, setImageURL] = useState('');
@@ -30,6 +32,10 @@ export default function App() {
 
   const handleLoadMore = () => {
     setPage(page + 1);
+  }
+
+  const handleToast = (toast) => {
+    setPage(toast);
   }
 
   const openModal = (url, likes, username) => {
@@ -69,7 +75,7 @@ export default function App() {
 
   return (
     <div>
-      <SearchBar onInput={handleSearch} />
+      <SearchBar onInput={handleSearch} toastState={handleToast} />
 
       {error && <ErrorMessage />}
 

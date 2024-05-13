@@ -2,13 +2,15 @@ import css from './SearchBar.module.css'
 import { Formik, Field, Form } from 'formik';
 import toast, { Toaster } from 'react-hot-toast';
 
-const notify = () => toast.error('Please enter your search query!');
-
-export default function SearchBar({ onInput }) {
+export default function SearchBar({ onInput, toastState }) {
 
     const handleSubmit = (values, actions) => {
         onInput(values.query);
-        console.log(values.query);
+        if (values.query === '') {
+            toastState(true)
+            toast.error('Please enter your search query!');
+            return;
+        }
         actions.resetForm();
     }
 
@@ -19,8 +21,8 @@ export default function SearchBar({ onInput }) {
                     <Field className={css.input} type="text" name="query" autoComplete="off"
                         autoFocus
                         placeholder="Search images and photos" />
-                    <button className={css.btn} type="submit" onClick={notify}>Search</button>
-
+                    <button className={css.btn} type="submit">Search</button>
+                    {toastState && <Toaster position="top-right" />}
                 </Form>
             </Formik>
         </header>
