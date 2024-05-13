@@ -18,7 +18,6 @@ export default function App() {
   const [query, setQuery] = useState('');
   const [toast, setToast] = useState(false);
 
-
   const [modal, setModal] = useState(false);
   const [imageURL, setImageURL] = useState('');
   const [userName, setUserName] = useState(null);
@@ -43,7 +42,7 @@ export default function App() {
     setImageURL(url);
     setUserName(username);
     setLikes(likes);
-    closeModal();
+    // closeModal();
   }
 
   const closeModal = () => {
@@ -85,7 +84,7 @@ export default function App() {
 
       {images.length > 0 && !loading && (<LoadMoreBtn onClick={handleLoadMore} />)}
 
-      (modal && <ImageModal img={imageURL} likes={likes} user={userName} modalState={modal} onClose={closeModal} />)
+      {modal && <ImageModal img={imageURL} likes={likes} user={userName} modalState={modal} onClose={closeModal} />}
 
     </div>
   )
